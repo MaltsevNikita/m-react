@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import Car from './Car/Car'
 
 class App extends Component {
@@ -19,11 +19,20 @@ class App extends Component {
       showCars: !this.state.showCars
     })
   }
-  changeTitleHandler = pageTitle =>{
-    this.setState({pageTitle})
+
+  onChangeName = (name, index) => {
+    const car = this.state.cars[index]
+    car.name = name
+    const cars = [...this.state.cars]
+    cars[index] = car
+    this.setState({cars})
   }
+  deleteHandler(index) {
+    const cars = this.state.cars.concat()
+    cars.splice(index, 1)
 
-
+    this.setState({cars})
+  }
   render() {
     const divStyle = {
       textAlign: 'center'
@@ -37,7 +46,8 @@ class App extends Component {
                 key={index}
                 name={car.name}
                 year={car.year}
-                onChangeTitle={() => this.changeTitleHandler(car.name)}
+                onDelete = {this.deleteHandler.bind(this,index)}
+                onChangeName={event => this.onChangeName(event.target.value, index)}
               />
             )
             
@@ -51,9 +61,14 @@ class App extends Component {
 
         <button
           onClick={this.toggleCarsHandler}
-        >Toggle cars</button>
-
-        { cars }
+        >Toggle cars </button>
+          <div style={{
+            width: 400,
+            margin: 'auto',
+            paddingTop: '20px'
+          }}>
+            { cars }
+          </div>
       </div>
     );
   }
