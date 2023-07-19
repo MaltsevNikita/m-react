@@ -1,17 +1,50 @@
 import React from 'react'
-import Radium from 'radium'
 import './Car.scss'
 
-const Car = props => {
-  const inputClasses = ['input']
+class Car extends React.Component{
 
-  if (props.name !== '') {
+  // componentWillReceiveProps(nextProps){
+  //   console.log('Car componentWillReceiveProps');
+  // }
+
+  shouldComponentUpdate(nextProps, nextState){
+    console.log('Car shouldComponentUpdate');
+    return nextProps.name.trim() !== this.props.name.trim()
+  }
+
+  componentWillUpdate(nextProps, nextState){
+    console.log('Car componentWillUpdate');
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState){
+    console.log('Car getDerivedStateFromProps', nextProps, prevState);
+
+    return prevState
+  }
+
+  componentDidUpdate(){
+    console.log('Car componentDidUpdate');
+  }
+  getSnapshotBeforeUpdate() {
+    console.log('getSnapshotBeforeUpdate()');
+  }
+
+  componentWillUnmount(){
+    console.log('Car componentWillUnmount');
+  }
+
+  render() {
+    console.log('Car render');
+    const inputClasses = ['input']
+
+
+  if (this.props.name !== '') {
     inputClasses.push('green')
   } else {
     inputClasses.push('red')
   }
 
-  if (props.name.length > 4) {
+  if (this.props.name.length > 4) {
     inputClasses.push('bold')
   }
 
@@ -27,18 +60,20 @@ const Car = props => {
 
   return (
     <div className="Car">
-      <h3>Сar name: {props.name}</h3>
-      <p>Year: <strong>{props.year}</strong></p>
+      <h3>Сar name: {this.props.name}</h3>
+      <p>Year: <strong>{this.props.year}</strong></p>
       <input
         type="text"
-        onChange={props.onChangeName}
-        value={props.name}
+        onChange={this.props.onChangeName}
+        value={this.props.name}
         className={inputClasses.join(' ')}
       />
-      <button onClick={props.onDelete}>Delete</button>
+      <button onClick={this.props.onDelete}>Delete</button>
     </div>
   )
+  }
 }
 
 
-export default Radium(Car)
+
+export default Car

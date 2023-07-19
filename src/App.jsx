@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './App.scss';
 import Car from './Car/Car'
+import Counter from './Counter/Counter'
 
 class App extends Component {
 
   state = {
     cars: [
       {name: 'Ford', year: 2018},
-      {name: 'Audi', year: 2016},
-      {name: 'Mazda', year: 2010}
+      // {name: 'Audi', year: 2016},
+      // {name: 'Mazda', year: 2010}
     ],
     pageTitle: 'Hello Nikitos!!!',
     showCars: false
@@ -19,7 +20,6 @@ class App extends Component {
       showCars: !this.state.showCars
     })
   }
-
   onChangeName = (name, index) => {
     const car = this.state.cars[index]
     car.name = name
@@ -57,10 +57,18 @@ class App extends Component {
 
     return (
       <div style={divStyle}>
+        
         <h1>{this.state.pageTitle}</h1>
+
+        <Counter/>
+
+        <hr/>
 
         <button
           onClick={this.toggleCarsHandler}
+          style = {{
+            marginTop:30
+          }}
         >Toggle cars </button>
           <div style={{
             width: 400,
