@@ -8,8 +8,8 @@ class App extends Component {
   state = {
     cars: [
       {name: 'Ford', year: 2018},
-      // {name: 'Audi', year: 2016},
-      // {name: 'Mazda', year: 2010}
+      {name: 'Audi', year: 2016},
+      {name: 'Mazda', year: 2010}
     ],
     pageTitle: 'Hello Nikitos!!!',
     showCars: false
@@ -44,6 +44,7 @@ class App extends Component {
             return (
               <Car
                 key={index}
+                index={index}
                 name={car.name}
                 year={car.year}
                 onDelete = {this.deleteHandler.bind(this,index)}
@@ -75,7 +76,8 @@ class App extends Component {
             margin: 'auto',
             paddingTop: '20px'
           }}>
-            { cars }
+            
+            {  cars }
           </div>
       </div>
     );
